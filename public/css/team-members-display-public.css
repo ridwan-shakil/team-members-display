@@ -1,0 +1,82 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+/* public css  */
+.rs-all-team-members {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.rs-single-team-member {
+	margin: 10px;
+	width: 30%;
+	text-align: center;
+	border: 1px solid gainsboro;
+}
+
+.tm-s-image {
+	width: 100%;
+	height: 200px;
+}
+
+h3.tm-s-name {
+	font-weight: bold;
+	margin: 0px;
+	font-size: 22px;
+	padding: 25px 10px 10px;
+}
+
+
+p.tm-s-position {
+	margin: 0px;
+	font-size: 18px;
+}
+
+.tm-s-description {
+	margin: 0px;
+	font-size: 16px;
+	padding: 10px 20px;
+}
+
+.social-links {
+	padding: 8px;
+	margin-bottom: 10px;
+}
+
+.tm-s-social {
+	margin: 5px;
+	color: white;
+}
+
+a.tm-s-social i {
+	font-size: 20px;
+	background: transparent;
+	color: #000;
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+	vertical-align: middle;
+	margin-right: 5px;
+	margin-bottom: 8px;
+	border-radius: 50%;
+	border: 1px solid #cfcfcf;
+}
+
+/* hover animation  */
+.rs-single-team-member {
+	transition: transform 0.2s ease-in-out;
+}
+
+.rs-single-team-member:hover {
+	transform: scale(1.05); /* Enlarge on hover */
+}
+
+.rs-single-team-member .tm-s-social i {
+	transition: color 0.2s ease-in-out;
+}
+
+.rs-single-team-member .tm-s-social i:hover {
+	transform: scale(1.10);
+}

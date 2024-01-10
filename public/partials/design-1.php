@@ -24,6 +24,7 @@ foreach ( $member_data as $member ) {
 	// Output HTML to display member details.
 	echo '<div class="rs-single-team-member">';
 	echo '<div class="member-img"> <img src="' . esc_url( $member['image'] ) . '" class="tm-s-image" alt="' . esc_attr( $member['name'] ) . '"> </div>';
+	echo '<div class="member-desc">';
 	echo '<div class="member-info">';
 	echo '<h3 class="tm-s-name">' . esc_html( $member['name'] ) . '</h3>';
 	echo '<p class="tm-s-position">' . esc_html( $member['position'] ) . '</p>';
@@ -43,6 +44,7 @@ foreach ( $member_data as $member ) {
 		}
 	}
 	echo '</div>'; // end of social.
+	echo '</div>'; // end of meber desc.
 	echo '</div>'; // end of single member.
 }
 echo '</div>';

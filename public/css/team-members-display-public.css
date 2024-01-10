@@ -13,7 +13,7 @@
 	margin: 10px;
 	width: 30%;
 	text-align: center;
-	border: 1px solid gainsboro;
+	border: 0px !important;
 }
 
 .tm-s-image {
@@ -80,4 +80,20 @@ a.tm-s-social i {
 
 .rs-single-team-member .tm-s-social i:hover {
 	transform: scale(1.10);
+}
+
+/* -------- some css adjustments ---------  */
+ .social-links a {
+ 	border: none;
+ }
+
+ .social-links a:hover {
+ 	color: none;
+ 	border-color: none;
+ 	background: none;
+ }
+
+.member-desc {
+	border: 1px solid #e2e1e1;
+	margin-top: -10px;
 }

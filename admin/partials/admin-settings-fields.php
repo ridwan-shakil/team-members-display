@@ -225,7 +225,7 @@ function team_social_profile_icon_size_field_callback() {
  * this section allow the user to change the styling of team members
  */
 function team_member_box_background_color_field_callback() {
-	$box_background_color = get_option( 'team_member_box_background_color', '#ffffff' );
+	$box_background_color = get_option( 'team_member_box_background_color', '#fffff' );
 	echo "<input type='text' class='smart-color-picker' name='team_member_box_background_color' value='" . esc_attr( $box_background_color ) . "' />";
 }
 

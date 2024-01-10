@@ -84,7 +84,10 @@ class Team_Members_Display_Admin {
 		if ( 'team_member_display_page_team-member-display-settings' === $screen ) {
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_style( 'tm-settings-admin', plugin_dir_url( __FILE__ ) . 'css/settings-admin.css', array(), $this->version, 'all' );
-			wp_enqueue_style( 'fontawesome4', plugin_dir_url( __FILE__ ) . '../public/css/font-awesome.css', array(), 4.7 );
+
+			// wp_enqueue_style( 'fontawesome4', plugin_dir_url( __FILE__ ) . '../public/css/font-awesome.css', array(), 4.7 );
+			wp_enqueue_style('fontawesome-cdn', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css', array(), 4.7, 'all');
+
 			wp_enqueue_style( 'tm-public-style', plugin_dir_url( __FILE__ ) . '../public/css/team-members-display-public.css', array(), $this->version );
 			$custom_css = get_option( 'custom_css' ); // Users custom css from settings page.
 			if ( ! empty( $custom_css ) ) {

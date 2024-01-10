@@ -79,7 +79,10 @@ class Team_Members_Display_Public {
 		if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'TEAM_MEMBERS' ) ) {
 
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/team-members-display-public.css', array(), $this->version, 'all' );
-			wp_enqueue_style( 'fontawesome4', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array(), 4.7, 'all' );
+
+			// wp_enqueue_style( 'fontawesome-icon', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array(), 4.7, 'all' );
+
+			wp_enqueue_style('fontawesome-cdn','//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css', array(), time(), 'all');
 
 			// Users custom css from settings page.
 			$custom_css = get_option( 'custom_css' );

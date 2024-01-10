@@ -24,10 +24,15 @@
  * @package    Team_Members_Display
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 // If uninstall not called from WordPress, then exit.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
+
 // ==================
 // Clear database
 // ==================
@@ -45,17 +50,17 @@ foreach ( $teams as $team ) {
 }
 
 // Deleting settings options.
-delete_option( 'tms_columns' );
-delete_option( 'tms_member_box_shadow' );
-delete_option( 'tms_member_image_height' );
-delete_option( 'tms_name_font_size' );
-delete_option( 'tms_designation_font_size' );
-delete_option( 'tms_description_font_size' );
-delete_option( 'tms_social_profile_icon_size' );
-delete_option( 'tms_member_box_background_color' );
-delete_option( 'tms_member_name_color' );
-delete_option( 'tms_member_designation_color' );
-delete_option( 'tms_member_description_color' );
-delete_option( 'tms_social_icon_color' );
-delete_option( 'tms_social_background_color' );
-delete_option( 'custom_css' );
+delete_option( 'team_columns' );
+delete_option( 'team_member_box_shadow' );
+delete_option( 'team_member_image_height' );
+delete_option( 'team_name_font_size' );
+delete_option( 'team_designation_font_size' );
+delete_option( 'team_description_font_size' );
+delete_option( 'team_social_profile_icon_size' );
+delete_option( 'team_member_box_background_color' );
+delete_option( 'team_member_name_color' );
+delete_option( 'team_member_designation_color' );
+delete_option( 'team_member_description_color' );
+delete_option( 'team_social_icon_color' );
+delete_option( 'team_social_background_color' );
+delete_option( 'team_custom_css' );

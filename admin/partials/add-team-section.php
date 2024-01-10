@@ -9,6 +9,7 @@
  * @subpackage Team_Members_Display/admin
  */
 
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -154,7 +155,7 @@ wp_nonce_field( 'save_team_display_nonce', 'team_display_nonce' );
 								</select>
 								<input type="url" name="fourth_social_link[]" value="<?php echo esc_url( $fourth_social_link ); ?>" placeholder="Social Link">
 							</div>
-							
+
 							<div class="delete-current-member"><span class="dashicons dashicons-trash delete_single"></span></div>
 						</div>
 					</div>
@@ -240,7 +241,7 @@ wp_nonce_field( 'save_team_display_nonce', 'team_display_nonce' );
 							<input type="url" name="fourth_social_link[]" value="" placeholder="Social Link">
 						</div>
 						<div class="delete-current-member"><span class="dashicons dashicons-trash delete_single"></span></div>
-						
+
 					</div>
 				</div>
 			</div>

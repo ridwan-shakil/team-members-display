@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -10,6 +9,10 @@
  * @subpackage Team_Members_Display/admin
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * Team_Members_Display_Admin class for admin functionality
  *
@@ -52,7 +55,7 @@ class Team_Members_Display_Admin {
 	 * @param      string $plugin_name       The name of this plugin.
 	 * @param      string $version    The version of this plugin.
 	 */
-	public function __construct($plugin_name, $version) {
+	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
@@ -66,29 +69,29 @@ class Team_Members_Display_Admin {
 	 * displayed in the WordPress admin area. It is used to conditionally enqueue stylesheets based on the
 	 * current screen.
 	 */
-	public function enqueue_styles($screen) {
+	public function enqueue_styles( $screen ) {
 		// CSS for team members  CPT only.
 		global $post;
-		if ('post-new.php' === $screen || 'post.php' === $screen) {
-			if ('team_member_display' === $post->post_type) {
-				wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/team-members-display-admin.css', array(), $this->version, 'all');
+		if ( 'post-new.php' === $screen || 'post.php' === $screen ) {
+			if ( 'team_member_display' === $post->post_type ) {
+				wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/team-members-display-admin.css', array(), $this->version, 'all' );
 				// Remove all admin notices for this CPT.
-				remove_all_actions('admin_notices');
+				remove_all_actions( 'admin_notices' );
 			}
 		}
 
 		// CSS only for our settings page.
-		if ('team_member_display_page_team-member-display-settings' === $screen) {
-			wp_enqueue_style('wp-color-picker');
-			wp_enqueue_style('tm-settings-admin', plugin_dir_url(__FILE__) . 'css/settings-admin.css', array(), $this->version, 'all');
-			wp_enqueue_style('fontawesome4', plugin_dir_url(__FILE__) . '../public/css/font-awesome.css', array(), 4.7);
-			wp_enqueue_style('tm-public-style', plugin_dir_url(__FILE__) . '../public/css/team-members-display-public.css', array(), $this->version);
-			$custom_css = get_option('custom_css'); // Users custom css from settings page.
-			if (!empty($custom_css)) {
-				wp_add_inline_style('tm-public-style', $custom_css);
+		if ( 'team_member_display_page_team-member-display-settings' === $screen ) {
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_style( 'tm-settings-admin', plugin_dir_url( __FILE__ ) . 'css/settings-admin.css', array(), $this->version, 'all' );
+			wp_enqueue_style( 'fontawesome4', plugin_dir_url( __FILE__ ) . '../public/css/font-awesome.css', array(), 4.7 );
+			wp_enqueue_style( 'tm-public-style', plugin_dir_url( __FILE__ ) . '../public/css/team-members-display-public.css', array(), $this->version );
+			$custom_css = get_option( 'custom_css' ); // Users custom css from settings page.
+			if ( ! empty( $custom_css ) ) {
+				wp_add_inline_style( 'tm-public-style', $custom_css );
 			}
 			// Remove all admin notices for this CPT.
-			remove_all_actions('admin_notices');
+			remove_all_actions( 'admin_notices' );
 		}
 	}
 
@@ -100,18 +103,18 @@ class Team_Members_Display_Admin {
 	 * being called on. It is typically used in WordPress to enqueue scripts and styles only on specific
 	 * screens or pages.
 	 */
-	public function enqueue_scripts($screen) {
+	public function enqueue_scripts( $screen ) {
 		// JS for team members  CPT only.
 		global $post;
-		if ('post-new.php' === $screen || 'post.php' === $screen) {
-			if ('team_member_display' === $post->post_type) {
+		if ( 'post-new.php' === $screen || 'post.php' === $screen ) {
+			if ( 'team_member_display' === $post->post_type ) {
 
-				wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/team-members-display-admin.js', array('jquery'), $this->version, false);
+				wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/team-members-display-admin.js', array( 'jquery' ), $this->version, false );
 				wp_localize_script(
 					$this->plugin_name,  // This name must be same as enqued script name.
 					'add_new_member_obj', // This has to be unique for every request.
 					array(
-						'ajax_url' => admin_url('admin-ajax.php'),
+						'ajax_url' => admin_url( 'admin-ajax.php' ),
 					)
 				);
 				wp_enqueue_media();
@@ -119,9 +122,9 @@ class Team_Members_Display_Admin {
 		}
 
 		// For sttings page only.
-		if ('team_member_display_page_team-member-display-settings' === $screen) {
-			wp_enqueue_script('wp-color-picker');
-			wp_enqueue_script('tm-settings-admin-js', plugin_dir_url(__FILE__) . 'js/settings-admin.js', array('jquery'), $this->version, false);
+		if ( 'team_member_display_page_team-member-display-settings' === $screen ) {
+			wp_enqueue_script( 'wp-color-picker' );
+			wp_enqueue_script( 'tm-settings-admin-js', plugin_dir_url( __FILE__ ) . 'js/settings-admin.js', array( 'jquery' ), $this->version, false );
 		}
 	}
 
@@ -131,35 +134,35 @@ class Team_Members_Display_Admin {
 	 */
 	public function register_team_members_cpt() {
 		$labels = array(
-			'name'                  => _x('All Teams', 'Post Type General Name', 'text_domain'),
-			'singular_name'         => _x('Team', 'Post Type Singular Name', 'text_domain'),
-			'menu_name'             => __('Team member display', 'text_domain'),
-			'name_admin_bar'        => __('All Teams', 'text_domain'),
-			'archives'              => __('Team Archives', 'text_domain'),
-			'attributes'            => __('Item Attributes', 'text_domain'),
-			'parent_item_colon'     => __('Parent Team:', 'text_domain'),
-			'all_items'             => __('All Teams', 'text_domain'),
-			'add_new_item'          => __('Add New Team', 'text_domain'),
-			'add_new'               => __('Add New Team', 'text_domain'),
-			'new_item'              => __('New Team', 'text_domain'),
-			'edit_item'             => __('Edit Team', 'text_domain'),
-			'update_item'           => __('Update Team', 'text_domain'),
-			'view_item'             => __('View Team', 'text_domain'),
-			'view_items'            => __('View Team', 'text_domain'),
-			'search_items'          => __('Search Team', 'text_domain'),
-			'not_found'             => __('Not found', 'text_domain'),
-			'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
-			'insert_into_item'      => __('Insert into Team', 'text_domain'),
-			'uploaded_to_this_item' => __('Uploaded to this item', 'text_domain'),
-			'items_list'            => __('Teams list', 'text_domain'),
-			'items_list_navigation' => __('Teams list navigation', 'text_domain'),
-			'filter_items_list'     => __('Filter Teams list', 'text_domain'),
+			'name'                  => _x( 'All Teams', 'Post Type General Name', 'text_domain' ),
+			'singular_name'         => _x( 'Team', 'Post Type Singular Name', 'text_domain' ),
+			'menu_name'             => __( 'Team member display', 'text_domain' ),
+			'name_admin_bar'        => __( 'All Teams', 'text_domain' ),
+			'archives'              => __( 'Team Archives', 'text_domain' ),
+			'attributes'            => __( 'Item Attributes', 'text_domain' ),
+			'parent_item_colon'     => __( 'Parent Team:', 'text_domain' ),
+			'all_items'             => __( 'All Teams', 'text_domain' ),
+			'add_new_item'          => __( 'Add New Team', 'text_domain' ),
+			'add_new'               => __( 'Add New Team', 'text_domain' ),
+			'new_item'              => __( 'New Team', 'text_domain' ),
+			'edit_item'             => __( 'Edit Team', 'text_domain' ),
+			'update_item'           => __( 'Update Team', 'text_domain' ),
+			'view_item'             => __( 'View Team', 'text_domain' ),
+			'view_items'            => __( 'View Team', 'text_domain' ),
+			'search_items'          => __( 'Search Team', 'text_domain' ),
+			'not_found'             => __( 'Not found', 'text_domain' ),
+			'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+			'insert_into_item'      => __( 'Insert into Team', 'text_domain' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+			'items_list'            => __( 'Teams list', 'text_domain' ),
+			'items_list_navigation' => __( 'Teams list navigation', 'text_domain' ),
+			'filter_items_list'     => __( 'Filter Teams list', 'text_domain' ),
 		);
 		$args   = array(
-			'label'               => __('Team member', 'text_domain'),
-			'description'         => __('Post Type Description', 'text_domain'),
+			'label'               => __( 'Team member', 'text_domain' ),
+			'description'         => __( 'Post Type Description', 'text_domain' ),
 			'labels'              => $labels,
-			'supports'            => array('title'),
+			'supports'            => array( 'title' ),
 			'hierarchical'        => false,
 			'public'              => true,
 			'show_ui'             => true,
@@ -174,7 +177,7 @@ class Team_Members_Display_Admin {
 			'publicly_queryable'  => true,
 			'capability_type'     => 'page',
 		);
-		register_post_type('team_member_display', $args);
+		register_post_type( 'team_member_display', $args );
 	}
 
 	/**
@@ -189,8 +192,8 @@ class Team_Members_Display_Admin {
 	 *
 	 * @return string the modified title.
 	 */
-	public function team_change_title_text($title, $post) {
-		if ('team_member_display' === $post->post_type) {
+	public function team_change_title_text( $title, $post ) {
+		if ( 'team_member_display' === $post->post_type ) {
 			$title = 'Team Name';
 		}
 		return $title;
@@ -205,13 +208,13 @@ class Team_Members_Display_Admin {
 	 *
 	 * @return an array of columns.
 	 */
-	public function team_display_columns($columns) {
+	public function team_display_columns( $columns ) {
 		$columns = array(
 			'cb'        => '<input type="checkbox" />',
-			'title'     => __('Teams'),
-			'count'     => __('Total Members'),
-			'shortcode' => __('Teams Shortcode'),
-			'date'      => __('Date'),
+			'title'     => __( 'Teams' ),
+			'count'     => __( 'Total Members' ),
+			'shortcode' => __( 'Teams Shortcode' ),
+			'date'      => __( 'Date' ),
 		);
 		return $columns;
 	}
@@ -228,26 +231,26 @@ class Team_Members_Display_Admin {
 	 *    taxonomies. In this case, the post ID is used to retrieve the total count of team members and
 	 *    display it.
 	 */
-	public function team_display_manage_columns($column, $post_id) {
+	public function team_display_manage_columns( $column, $post_id ) {
 		global $post;
 		/**
 		 * If $total_count dowsn't exist in cache then run the query and add it to the cache.
 		 */
-		$total_count = wp_cache_get('cached-total-members-' . $post_id, 'team_members_display');
-		if (false === $total_count) {
-			$total_count = get_post_meta($post_id, 'rs_total_members', true);
-			wp_cache_add('cached-total-members-' . $post_id, $total_count, 'team_members_display');
+		$total_count = wp_cache_get( 'cached-total-members-' . $post_id, 'team_members_display' );
+		if ( false === $total_count ) {
+			$total_count = get_post_meta( $post_id, 'rs_total_members', true );
+			wp_cache_add( 'cached-total-members-' . $post_id, $total_count, 'team_members_display' );
 		}
 
-		if (!$total_count || -1 === $total_count) {
+		if ( ! $total_count || -1 === $total_count ) {
 			$total_count = 0;
 		}
-		switch ($column) {
+		switch ( $column ) {
 			case 'count':
-				echo esc_html($total_count);
+				echo esc_html( $total_count );
 				break;
 			case 'shortcode':
-				echo '<input type="text"  style="width:200px" value="[TEAM_MEMBERS id=' . esc_html($post_id) . ']" readonly="readonly" onclick="this.select()" />';
+				echo '<input type="text"  style="width:200px" value="[TEAM_MEMBERS id=' . esc_html( $post_id ) . ']" readonly="readonly" onclick="this.select()" />';
 				break;
 			default:
 				break;
@@ -259,7 +262,7 @@ class Team_Members_Display_Admin {
 	 * the title "Team Section".
 	 */
 	public function team_member_addmetaboxes() {
-		add_meta_box('add_team_section', __('Team Section', 'team-members-display'), array($this, 'add_team_section'), 'team_member_display');
+		add_meta_box( 'add_team_section', __( 'Team Section', 'team-members-display' ), array( $this, 'add_team_section' ), 'team_member_display' );
 	}
 
 	/**
@@ -270,7 +273,7 @@ class Team_Members_Display_Admin {
 	 * typically used in WordPress functions and hooks to access information about the current post being
 	 * displayed or edited.
 	 */
-	public function add_team_section($post) {
+	public function add_team_section( $post ) {
 		require_once TEAM_PLUGIN_DIR_PATH . 'admin/partials/add-team-section.php';
 	}
 
@@ -292,7 +295,7 @@ class Team_Members_Display_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function save_team_display_meta_fields($post_id) {
+	public function save_team_display_meta_fields( $post_id ) {
 		require_once TEAM_PLUGIN_DIR_PATH . 'admin/data-save/save-new-members.php';
 	}
 
@@ -307,11 +310,11 @@ class Team_Members_Display_Admin {
 	public function team_m_display_submenu_page() {
 		add_submenu_page(
 			'edit.php?post_type=team_member_display',
-			__('Team Member Display Settings', 'team-members-display'),
-			__('Settings', 'team-members-display'),
+			__( 'Team Member Display Settings', 'team-members-display' ),
+			__( 'Settings', 'team-members-display' ),
 			'manage_options',
 			'team-member-display-settings',
-			array($this, 'team_member_display_settings_page')
+			array( $this, 'team_member_display_settings_page' )
 		);
 	}
 
@@ -344,9 +347,9 @@ class Team_Members_Display_Admin {
 	 *
 	 * @return array of links with an additional "Settings" link.
 	 */
-	public function add_settings_link($links) {
-		$settings_link = '<a href="' . admin_url('admin.php?page=team-member-display-settings') . '">Settings</a>';
-		array_push($links, $settings_link);
+	public function add_settings_link( $links ) {
+		$settings_link = '<a href="' . admin_url( 'admin.php?page=team-member-display-settings' ) . '">Settings</a>';
+		array_push( $links, $settings_link );
 		return $links;
 	}
 }

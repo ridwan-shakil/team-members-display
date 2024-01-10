@@ -12,6 +12,10 @@
  * @subpackage Team_Members_Display/includes
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * The core plugin class.
  *

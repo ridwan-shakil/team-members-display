@@ -12,6 +12,10 @@
  * @subpackage Team_Members_Display/includes
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * Define the internationalization functionality.
  *
@@ -24,7 +28,6 @@
  * @author     MD.Ridwan <ridwansweb@gmail.com>
  */
 class Team_Members_Display_i18n {
-
 
 	/**
 	 * Load the plugin text domain for translation.

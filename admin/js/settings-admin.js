@@ -54,7 +54,7 @@
 			// container section
 			// ------------------------
 			// Team column layout.
-			$( '#tms-columns-select' ).on(
+			$( '#team-columns-select' ).on(
 				'change',
 				function () {
 					var selectdValue = $( this ).val();
@@ -63,7 +63,7 @@
 			);
 
 			// Show or hide box shadow.
-			var checkbox = $( '#tms_member_box_shadow' );
+			var checkbox = $( '#team_member_box_shadow' );
 			checkbox.on(
 				'click',
 				function () {
@@ -76,7 +76,7 @@
 			);
 
 			// member image height.
-			$( 'input[name="tms_member_image_height"]' ).on(
+			$( 'input[name="team_member_image_height"]' ).on(
 				'input',
 				function () {
 					var input = $( this ).val();
@@ -84,7 +84,7 @@
 				}
 			);
 			// Name font size.
-			$( 'input[name="tms_name_font_size"]' ).on(
+			$( 'input[name="team_name_font_size"]' ).on(
 				'input',
 				function () {
 					var input = $( this ).val();
@@ -92,7 +92,7 @@
 				}
 			);
 			// Designation font size.
-			$( 'input[name="tms_designation_font_size"]' ).on(
+			$( 'input[name="team_designation_font_size"]' ).on(
 				'input',
 				function () {
 					var input = $( this ).val();
@@ -100,7 +100,7 @@
 				}
 			);
 			// Description font size.
-			$( 'input[name="tms_description_font_size"]' ).on(
+			$( 'input[name="team_description_font_size"]' ).on(
 				'input',
 				function () {
 					var input = $( this ).val();
@@ -108,7 +108,7 @@
 				}
 			);
 			// Social profile icon size.
-			$( 'input[name="tms_social_profile_icon_size"]' ).on(
+			$( 'input[name="team_social_profile_icon_size"]' ).on(
 				'input',
 				function () {
 					var input     = $( this ).val();
@@ -131,7 +131,7 @@
 			// Style section
 			// ------------------------
 			// member_box_background_color.
-			$( 'input[name="tms_member_box_background_color"]' ).wpColorPicker(
+			$( 'input[name="team_member_box_background_color"]' ).wpColorPicker(
 				{
 					change: function (event, ui) {
 						var newColor = ui.color.toString();
@@ -143,8 +143,8 @@
 				}
 			);
 
-			// tms_member_name_color.
-			$( 'input[name="tms_member_name_color"]' ).wpColorPicker(
+			// team_member_name_color.
+			$( 'input[name="team_member_name_color"]' ).wpColorPicker(
 				{
 					change: function (event, ui) {
 						var newColor = ui.color.toString();
@@ -156,8 +156,8 @@
 				}
 			);
 
-			// tms_member_designation_color.
-			$( 'input[name="tms_member_designation_color"]' ).wpColorPicker(
+			// team_member_designation_color.
+			$( 'input[name="team_member_designation_color"]' ).wpColorPicker(
 				{
 					change: function (event, ui) {
 						var newColor = ui.color.toString();
@@ -169,8 +169,8 @@
 				}
 			);
 
-			// tms_member_description_color.
-			$( 'input[name="tms_member_description_color"]' ).wpColorPicker(
+			// team_member_description_color.
+			$( 'input[name="team_member_description_color"]' ).wpColorPicker(
 				{
 					change: function (event, ui) {
 						var newColor = ui.color.toString();
@@ -182,8 +182,8 @@
 				}
 			);
 
-			// tms_social_icon_color.
-			$( 'input[name="tms_social_icon_color"]' ).wpColorPicker(
+			// team_social_icon_color.
+			$( 'input[name="team_social_icon_color"]' ).wpColorPicker(
 				{
 					change: function (event, ui) {
 						var newColor = ui.color.toString();
@@ -195,8 +195,8 @@
 				}
 			);
 
-			// tms_social_background_color.
-			$( 'input[name="tms_social_background_color"]' ).wpColorPicker(
+			// team_social_background_color.
+			$( 'input[name="team_social_background_color"]' ).wpColorPicker(
 				{
 					change: function (event, ui) {
 						var newColor = ui.color.toString();

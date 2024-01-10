@@ -10,9 +10,11 @@
  * @subpackage Team_Members_Display/admin
  */
 
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 // Settings style that has been added from settings page.
 require_once TEAM_PLUGIN_DIR_PATH . 'public/partials/settings-css.php';
 ?>
@@ -22,7 +24,7 @@ require_once TEAM_PLUGIN_DIR_PATH . 'public/partials/settings-css.php';
 </div>
 
 <!-- Notice  -->
-<div class="tms_notice">
+<div class="team_notice">
 	<p><?php esc_html_e( 'Here are some demo team members . Change the styling and see a visual representation how your team members are going to look  like in the frontend . ', 'team-members-display' ); ?></p>
 </div>
 
@@ -72,4 +74,3 @@ require_once TEAM_PLUGIN_DIR_PATH . 'public/partials/settings-css.php';
 		</div>
 	</div>
 </div>
-

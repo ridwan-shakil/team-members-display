@@ -9,6 +9,7 @@
  * @subpackage Team_Members_Display/admin
  */
 
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

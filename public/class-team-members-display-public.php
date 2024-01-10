@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The public-facing functionality of the plugin.
  *
@@ -10,6 +9,9 @@
  * @subpackage Team_Members_Display/public
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 /**
  * The public-facing functionality of the plugin.
  *
@@ -47,7 +49,7 @@ class Team_Members_Display_Public {
 	 * @param      string $plugin_name       The name of the plugin.
 	 * @param      string $version    The version of this plugin.
 	 */
-	public function __construct($plugin_name, $version) {
+	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
@@ -74,15 +76,15 @@ class Team_Members_Display_Public {
 
 		// Check if the post content contains your shortcode.
 		global $post;
-		if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'TEAM_MEMBERS')) {
+		if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'TEAM_MEMBERS' ) ) {
 
-			wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/team-members-display-public.css', array(), $this->version, 'all');
-			wp_enqueue_style('fontawesome4', plugin_dir_url(__FILE__) . 'css/font-awesome.css', array(), 4.7, 'all');
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/team-members-display-public.css', array(), $this->version, 'all' );
+			wp_enqueue_style( 'fontawesome4', plugin_dir_url( __FILE__ ) . 'css/font-awesome.css', array(), 4.7, 'all' );
 
 			// Users custom css from settings page.
-			$custom_css = get_option('custom_css');
-			if (!empty($custom_css)) {
-				wp_add_inline_style($this->plugin_name, $custom_css);
+			$custom_css = get_option( 'custom_css' );
+			if ( ! empty( $custom_css ) ) {
+				wp_add_inline_style( $this->plugin_name, $custom_css );
 			}
 		}
 	}

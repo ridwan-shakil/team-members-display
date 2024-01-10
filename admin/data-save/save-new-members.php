@@ -9,6 +9,11 @@
  * @subpackage Team_Members_Display/admin/data-save
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 	return false;
 }
@@ -33,7 +38,7 @@ if ( ! isset( $_POST['team_display_nonce'] ) ) {
 /**
  * If condition is true then saves the data into post meta else deletes it.
  */
-if ( isset( $_POST['mb_name'] ) && isset( $_POST['mb_pos'] ) && isset( $_POST['mb_desc'] ) ) {
+if ( isset( $_POST['mb_name'] ) && isset( $_POST['mb_pos'] ) && isset( $_POST['mb_img'] ) && isset( $_POST['mb_desc'] ) ) {
 	// Unslash the incoming data then sanitze the data.
 	$mb_img          = array_map( 'sanitize_text_field', wp_unslash( $_POST['mb_img'] ) );
 	$mb_names        = array_map( 'sanitize_text_field', wp_unslash( $_POST['mb_name'] ) );

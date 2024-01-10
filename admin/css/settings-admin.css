@@ -82,7 +82,7 @@ textarea#custom_css_area {
 }
 
 /* notice  */
-.tms_notice {
+.team_notice {
 	margin: 40px 0px;
 	padding: 10px 10px 10px 20px;
 	border-left: 9px solid green;
@@ -90,7 +90,7 @@ textarea#custom_css_area {
 	width: 90%;
 }
 
-.tms_notice p {
+.team_notice p {
 	font-size: 18px;
 }
 

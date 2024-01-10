@@ -25,7 +25,9 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 /**
  * Currently plugin version.
  * Start at version 1.0.0
@@ -59,9 +61,9 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-team-members-display.php';
  *
  * @since    1.0.0
  */
-function run_team_members_display() {
+function team_run_team_members_display() {
 
 	$plugin = new Team_Members_Display();
 	$plugin->run();
 }
-run_team_members_display();
+team_run_team_members_display();

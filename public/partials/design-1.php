@@ -9,7 +9,12 @@
  * @subpackage Team_Members_Display/public/partials
  */
 
-// require css those has been added from plugin settings page.
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// Require css those has been added from plugin settings page.
 require TEAM_PLUGIN_DIR_PATH . 'public/partials/settings-css.php';
 
 echo '<div class="rs-all-team-members " >';
